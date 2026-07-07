@@ -37,10 +37,10 @@ const seedData = [
     isActive: true,
     content: {
       stats: [
-        { value: "10K+", label: "Successful Deliveries", suffix: "" },
-        { value: "220+", label: "Global Destinations", suffix: "" },
-        { value: "99.8%", label: "Customs Clearance Rate", suffix: "" },
-        { value: "4.9/5", label: "Customer Rating", suffix: "" }
+        { value: "48000+", label: "Successful Deliveries", suffix: "" },
+        { value: "4.9 Excellent", label: "Google Rating", suffix: "", icon: "Google" },
+        { value: "100%", label: "Customs Clearance Rate", suffix: "" },
+        { value: "4.7", label: "Trustpilot rating", suffix: "" }
       ]
     }
   },
