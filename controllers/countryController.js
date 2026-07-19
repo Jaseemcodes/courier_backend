@@ -29,7 +29,10 @@ exports.getCountryBySlug = asyncHandler(async (req, res, next) => {
   const country = await Country.findOne({ slug: req.params.slug.toLowerCase(), isDeleted: false });
 
   if (!country) {
-    return next(new AppError(`Country not found with slug of ${req.params.slug}`, 404));
+    return res.status(200).json({
+      success: true,
+      data: null
+    });
   }
 
   res.status(200).json({
@@ -81,7 +84,7 @@ exports.createCountry = asyncHandler(async (req, res, next) => {
     'code', 'name', 'slug', 'basePrice', 'advice', 'isActive', 'sortOrder',
     'heroTitle', 'introHeading', 'docHeading', 'doc1Title', 'doc1Content', 'doc2Title', 'doc2Content', 'doc3Title', 'doc3Content', 'serviceHeading', 'service1Title', 'service1Content', 'service2Title', 'service2Content', 'service3Title', 'service3Content', 'service4Title', 'service4Content', 'metaViewTitle', 'metaKeywords', 'metaDescription',
     'processImage1', 'processImage2', 'processImage3', 'processImage4', 'processImage5', 'documentImage',
-    'pricingMatrix', 'medicineCourierServices', 'documentsNeeded', 'servicesWeOffer', 'process1', 'process2', 'faq', 'faqHeading', 'faq1Q', 'faq1A', 'faq2Q', 'faq2A', 'faq3Q', 'faq3A', 'faq4Q', 'faq4A', 'faq5Q', 'faq5A'
+    'pricingMatrix', 'medicineCourierServices', 'documentsNeeded', 'servicesWeOffer', 'process1', 'process2', 'faq', 'faqHeading', 'faq1Q', 'faq1A', 'faq2Q', 'faq2A', 'faq3Q', 'faq3A', 'faq4Q', 'faq4A', 'faq5Q', 'faq5A', 'faq6Q', 'faq6A', 'faq7Q', 'faq7A', 'faq8Q', 'faq8A', 'faq9Q', 'faq9A', 'faq10Q', 'faq10A'
   ];
 
   const countryData = {};
@@ -136,7 +139,7 @@ exports.updateCountry = asyncHandler(async (req, res, next) => {
     'code', 'name', 'slug', 'basePrice', 'advice', 'isActive', 'sortOrder',
     'heroTitle', 'introHeading', 'docHeading', 'doc1Title', 'doc1Content', 'doc2Title', 'doc2Content', 'doc3Title', 'doc3Content', 'serviceHeading', 'service1Title', 'service1Content', 'service2Title', 'service2Content', 'service3Title', 'service3Content', 'service4Title', 'service4Content', 'metaViewTitle', 'metaKeywords', 'metaDescription',
     'processImage1', 'processImage2', 'processImage3', 'processImage4', 'processImage5', 'documentImage',
-    'pricingMatrix', 'medicineCourierServices', 'documentsNeeded', 'servicesWeOffer', 'process1', 'process2', 'faq', 'faqHeading', 'faq1Q', 'faq1A', 'faq2Q', 'faq2A', 'faq3Q', 'faq3A', 'faq4Q', 'faq4A', 'faq5Q', 'faq5A'
+    'pricingMatrix', 'medicineCourierServices', 'documentsNeeded', 'servicesWeOffer', 'process1', 'process2', 'faq', 'faqHeading', 'faq1Q', 'faq1A', 'faq2Q', 'faq2A', 'faq3Q', 'faq3A', 'faq4Q', 'faq4A', 'faq5Q', 'faq5A', 'faq6Q', 'faq6A', 'faq7Q', 'faq7A', 'faq8Q', 'faq8A', 'faq9Q', 'faq9A', 'faq10Q', 'faq10A'
   ];
 
   updatableFields.forEach(field => {

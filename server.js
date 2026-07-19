@@ -28,6 +28,8 @@ const homepageRoutes = require('./routes/homepageRoutes');
 const aboutRoutes = require('./routes/aboutRoutes');
 const pricingRoutes = require('./routes/pricingRoutes');
 const providerRoutes = require('./routes/providerRoutes');
+const refundPolicyRoutes = require('./routes/refundPolicyRoutes');
+const privacyPolicyRoutes = require('./routes/privacyPolicyRoutes');
 
 const app = express();
 
@@ -86,6 +88,8 @@ app.use('/api/homepage', homepageRoutes);
 app.use('/api/about', aboutRoutes);
 app.use('/api/pricing', pricingRoutes);
 app.use('/api/providers', providerRoutes);
+app.use('/api/refund-policy', refundPolicyRoutes);
+app.use('/api/privacy-policy', privacyPolicyRoutes);
 
 // Root route
 app.get('/', (req, res) => {

@@ -175,6 +175,7 @@ exports.deleteBlog = asyncHandler(async (req, res, next) => {
 
   blog.isDeleted = true;
   blog.deletedAt = Date.now();
+  blog.slug = `${blog.slug}-deleted-${Date.now()}`;
   await blog.save();
 
   res.status(200).json({

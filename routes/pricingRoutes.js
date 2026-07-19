@@ -17,7 +17,7 @@ router.route('/country/:country').get(getPricingByCountry);
 
 // Admin only routes
 router.use(protect);
-router.use(authorize('admin'));
+router.use(authorize('superadmin', 'admin'));
 
 router.route('/')
   .post(createPricing);

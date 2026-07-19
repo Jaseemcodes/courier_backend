@@ -34,11 +34,11 @@ const importData = async () => {
     await BlogPost.deleteMany();
     await SiteSettings.deleteMany();
     await User.deleteMany();
-    // Note: order, quote and contact tables are not seeded but cleared during fresh seed if desired.
-    // Let's clear them too for a clean state.
-    await Order.deleteMany();
-    await QuoteRequest.deleteMany();
-    await ContactSubmission.deleteMany();
+    // Note: order, quote and contact tables are LIVE USER DATA!
+    // ABSOLUTELY NEVER DELETE THESE IN A SEED SCRIPT!
+    // await Order.deleteMany();
+    // await QuoteRequest.deleteMany();
+    // await ContactSubmission.deleteMany();
     console.log('✅ Collections cleared.');
 
     // 1. Seed Countries
@@ -114,9 +114,10 @@ const destroyData = async () => {
     await BlogPost.deleteMany();
     await SiteSettings.deleteMany();
     await User.deleteMany();
-    await Order.deleteMany();
-    await QuoteRequest.deleteMany();
-    await ContactSubmission.deleteMany();
+    // DANGER: We DO NOT delete live user data (Orders, Quotes, Contacts) even when purging!
+    // await Order.deleteMany();
+    // await QuoteRequest.deleteMany();
+    // await ContactSubmission.deleteMany();
     console.log('✅ Database fully purged.');
     process.exit(0);
   } catch (error) {

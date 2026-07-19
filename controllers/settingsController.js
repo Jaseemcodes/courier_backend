@@ -43,7 +43,7 @@ exports.updateSettings = asyncHandler(async (req, res, next) => {
     settings = new SiteSettings();
   }
 
-  const { phone, whatsapp, email, workingHours, address, socialLinks, aboutText, copyright, countryHeroImage } = req.body;
+  const { phone, whatsapp, email, workingHours, address, socialLinks, aboutText, copyright, countryHeroImage, documentImage } = req.body;
 
   if (phone !== undefined) settings.phone = phone;
   if (whatsapp !== undefined) settings.whatsapp = whatsapp;
@@ -53,6 +53,7 @@ exports.updateSettings = asyncHandler(async (req, res, next) => {
   if (aboutText !== undefined) settings.aboutText = aboutText;
   if (copyright !== undefined) settings.copyright = copyright;
   if (countryHeroImage !== undefined) settings.countryHeroImage = countryHeroImage;
+  if (documentImage !== undefined) settings.documentImage = documentImage;
 
   if (req.files) {
     if (req.files.processImage1) settings.processImage1 = req.files.processImage1[0].path;
@@ -65,11 +66,12 @@ exports.updateSettings = asyncHandler(async (req, res, next) => {
   }
 
   if (socialLinks) {
+    const existingLinks = settings.socialLinks || {};
     settings.socialLinks = {
-      facebook: socialLinks.facebook !== undefined ? socialLinks.facebook : settings.socialLinks.facebook,
-      instagram: socialLinks.instagram !== undefined ? socialLinks.instagram : settings.socialLinks.instagram,
-      youtube: socialLinks.youtube !== undefined ? socialLinks.youtube : settings.socialLinks.youtube,
-      twitter: socialLinks.twitter !== undefined ? socialLinks.twitter : settings.socialLinks.twitter
+      facebook: socialLinks.facebook !== undefined ? socialLinks.facebook : existingLinks.facebook,
+      instagram: socialLinks.instagram !== undefined ? socialLinks.instagram : existingLinks.instagram,
+      youtube: socialLinks.youtube !== undefined ? socialLinks.youtube : existingLinks.youtube,
+      twitter: socialLinks.twitter !== undefined ? socialLinks.twitter : existingLinks.twitter
     };
   }
 

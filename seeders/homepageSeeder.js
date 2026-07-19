@@ -87,27 +87,39 @@ const seedData = [
   {
     key: "easy-courier",
     name: "Simple Step Accordions",
-    title: "We Made Courier Medicines Easy",
-    subtitle: "Our streamlined process ensures your essential medicines reach you in 4 simple steps.",
+    title: "We Made Courier Medicines EASY",
+    subtitle: "We offer complete assistance to make the entire process easy, transparent and reliable for you.",
     sortOrder: 4,
     isActive: true,
     content: {
       accordions: [
         {
-          title: "1. Upload Prescription & Details",
-          content: "Simply share your valid prescription along with the quantity of medicines you require. Our pharmacy compliance experts will review and verify it."
+          title: "Free Door-to-Door Pickup & Delivery",
+          content: "Courier Medicines offers completely free doorstep medical shipment collection. You do not need to visit our warehouse; our dedicated local courier agent will collect your medicines directly from your residence or pharmacy across any location in India."
         },
         {
-          title: "2. Procurement (If Required)",
-          content: "Don't have the medicines? No worries. We can procure them on your behalf from licensed pharmacies in India at discounted prices."
+          title: "Reasonable rates",
+          content: "We provide highly competitive and cheapest courier rates for global medicine delivery. Our structured corporate tie-ups with major international express partners ensure you receive premium high-speed courier solutions at heavily discounted pocket-friendly prices."
         },
         {
-          title: "3. Professional Packaging & Customs Clearance",
-          content: "Medicines are packed in certified temperature-resistant boxes with original invoices. We handle all customs documentation, clearances, and regulatory filings."
+          title: "Purchase of Medicines on your behalf",
+          content: "If you cannot procure specific medicines locally, our specialized procurement desk can purchase them from certified authorized pharmacies in India on your behalf, aggregate them, verify the batch numbers/expiry dates, and ship them securely."
         },
         {
-          title: "4. Express Doorstep Delivery",
-          content: "Enjoy free home pickup in India and express international shipping with real-time transit tracking straight to your global destination."
+          title: "Medicines Packing Services",
+          content: "Courier Medicines helps in Packing also. As in case of pick up, the customer has to do the initial packing. Upon arrival at our warehouse, our team checks the condition of the medicines and determines the appropriate way, be it bubble wrap, thermacol, envelopes, or cardboard box to protect your medications from damage and maintaining their integrity throughout the delivery process."
+        },
+        {
+          title: "Guaranteed Delivery Timeline",
+          content: "We understand that medicines are life-critical. That's why we operate on a strictly committed and guaranteed delivery schedule. Typically, international shipments are delivered within 3 to 5 business days, backed by express air transit corridors."
+        },
+        {
+          title: "24/7 Customer Support",
+          content: "Need assistance with your package status or documentation queries at midnight? Our live support desk operates 24/7/365 to handle your urgent concerns immediately, assuring peace of mind at every milestone of your shipping experience."
+        },
+        {
+          title: "Easy Payment Options",
+          content: "We offer smooth, hassle-free payment flexibilities including Online Direct Bank Transfers, UPI (Google Pay, PhonePe, Paytm), Credit/Debit Card payments, and Stripe checkout options for global Indian diaspora customers."
         }
       ]
     }
@@ -124,23 +136,27 @@ const seedData = [
   {
     key: "documents",
     name: "Required Documentation Guide",
-    title: "Hassle-Free Customs & Documentation Support",
+    title: "We Help You With DOCUMENTATION",
     subtitle: "We guide you in preparing the exact paperwork needed to guarantee smooth clearance.",
     sortOrder: 6,
     isActive: true,
     content: {
       items: [
         {
-          title: "Valid Doctor's Prescription",
-          content: "A scanned copy of a valid prescription listing the patient name, medicine names, dosage, and doctor's license details."
+          title: "Soft Copies of Prescriptions Required",
+          content: "To initiate your medical shipment, we require a scan or clean photo of a valid prescription issued by a registered medical practitioner. This ensures compliance with international customs laws and pharmaceutical export statutes."
         },
         {
-          title: "Patient Identity Proof",
-          content: "Identity document (Passport copy, national ID, or visa copy) of the receiver living abroad to verify the importer profile."
+          title: "Soft Copies of Bills Required",
+          content: "A genuine purchase retail bill from a licensed medical store or pharmacy is mandatory. The name on the bill, prescription, and courier packing slip must correspond to maintain swift clearance without bureaucratic holdups."
         },
         {
-          title: "Original Invoice & Bills",
-          content: "The original store receipt containing batch numbers, expiry dates, price tags, and official pharmacy stamp signatures."
+          title: "Medicine Export Invoice Preparation",
+          content: "Our logistics documentation specialists will handle the complex process of structuring full customs commercial invoices, MSDS declarations, and pharmaceutical export cargo lists for zero stress on your end."
+        },
+        {
+          title: "Customs Clearance Assistance",
+          content: "If your shipment Need help in customs clearance, Our team is there to Guide you through process to ensure your medicines are delivered promptly and efficiently. If any Financials involve to pay custom duty than receiver has to pay, As Courier Medicines don't have any Financial Interest into it."
         }
       ]
     }

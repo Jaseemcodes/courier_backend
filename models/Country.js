@@ -102,6 +102,16 @@ const CountrySchema = new mongoose.Schema(
     faq4A: { type: String, default: "" },
     faq5Q: { type: String, default: "" },
     faq5A: { type: String, default: "" },
+    faq6Q: { type: String, default: "" },
+    faq6A: { type: String, default: "" },
+    faq7Q: { type: String, default: "" },
+    faq7A: { type: String, default: "" },
+    faq8Q: { type: String, default: "" },
+    faq8A: { type: String, default: "" },
+    faq9Q: { type: String, default: "" },
+    faq9A: { type: String, default: "" },
+    faq10Q: { type: String, default: "" },
+    faq10A: { type: String, default: "" },
 
     // Soft-delete fields
     isDeleted: {
