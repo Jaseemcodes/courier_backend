@@ -1,5 +1,7 @@
 const Order = require('../models/Order');
 const QuoteRequest = require('../models/QuoteRequest');
+const Pricing = require('../models/Pricing');
+const Country = require('../models/Country');
 const AppError = require('../utils/AppError');
 const asyncHandler = require('../middlewares/asyncHandler');
 
@@ -312,8 +314,6 @@ exports.createPublicOrder = asyncHandler(async (req, res, next) => {
     medicineType,
     hasPrescription,
     weight,
-    basePrice,
-    finalPrice,
     courierPartner,
     estimatedDeliveryTime,
     notes
@@ -321,6 +321,71 @@ exports.createPublicOrder = asyncHandler(async (req, res, next) => {
 
   if (!customerName || !customerPhone || !originCity || !destinationCountry || !destinationAddress) {
     return next(new AppError('Please provide customerName, customerPhone, originCity, destinationCountry, and destinationAddress', 400));
+  }
+
+  // Calculate pricing server-side to prevent client-side price tampering/spoofing
+  let calculatedPrice = 0;
+  let basePriceVal = 0;
+  const weightNum = parseFloat(weight || 0.5);
+
+  // 1. Check custom pricing table by country name
+  const countryPricing = await Pricing.findOne({ 
+    country: { $regex: new RegExp(`^${destinationCountry.trim()}$`, 'i') } 
+  });
+
+  if (countryPricing && courierPartner) {
+    const providerData = countryPricing.providers.find(
+      p => p.provider.toUpperCase() === courierPartner.trim().toUpperCase()
+    );
+    if (providerData) {
+      const { halfKgPrice, oneKgPrice } = providerData;
+      if (weightNum <= 0.5) {
+        calculatedPrice = halfKgPrice;
+      } else if (weightNum <= 1.0) {
+        calculatedPrice = oneKgPrice;
+      } else {
+        const diff = oneKgPrice - halfKgPrice;
+        const extraWeight = weightNum - 1.0;
+        const steps = Math.ceil(extraWeight / 0.5);
+        calculatedPrice = oneKgPrice + (steps * diff);
+      }
+      basePriceVal = halfKgPrice;
+    }
+  }
+
+  // 2. Fallback to Country collection base price calculation
+  if (calculatedPrice === 0) {
+    const countryObj = await Country.findOne({ 
+      $or: [
+        { name: { $regex: new RegExp(`^${destinationCountry.trim()}$`, 'i') } },
+        { code: destinationCountry.trim().toUpperCase() }
+      ],
+      isDeleted: false 
+    });
+    if (countryObj) {
+      basePriceVal = countryObj.basePrice;
+      if (weightNum <= 0.5) {
+        calculatedPrice = basePriceVal;
+      } else if (weightNum <= 1.0) {
+        calculatedPrice = basePriceVal + 1500;
+      } else {
+        const extraWeight = weightNum - 1.0;
+        const steps = Math.ceil(extraWeight / 0.5);
+        calculatedPrice = basePriceVal + 1500 + (steps * 1500);
+      }
+    } else {
+      // 3. Absolute fallback
+      basePriceVal = 3500;
+      if (weightNum <= 0.5) {
+        calculatedPrice = 3500;
+      } else if (weightNum <= 1.0) {
+        calculatedPrice = 5000;
+      } else {
+        const extraWeight = weightNum - 1.0;
+        const steps = Math.ceil(extraWeight / 0.5);
+        calculatedPrice = 5000 + (steps * 1500);
+      }
+    }
   }
 
   // Generate unique booking reference
@@ -347,9 +412,9 @@ exports.createPublicOrder = asyncHandler(async (req, res, next) => {
     destinationAddress,
     medicineType,
     hasPrescription: hasPrescription === undefined ? true : hasPrescription,
-    weight: weight || 0,
-    basePrice: basePrice || 0,
-    finalPrice: finalPrice || basePrice || 0,
+    weight: weightNum,
+    basePrice: Math.round(basePriceVal),
+    finalPrice: Math.round(calculatedPrice),
     paymentStatus: 'pending',
     status: 'booking_confirmed',
     currentLocation: originCity,

@@ -5,13 +5,13 @@ const {
   getHomepageSectionsAdmin, 
   updateHomepageSection 
 } = require('../controllers/homepageController');
-const { protect } = require('../middlewares/auth');
+const { protect, authorize } = require('../middlewares/auth');
 
 // Public route
 router.get('/', getHomepageSections);
 
 // Protected routes (Admin only)
-router.get('/admin', protect, getHomepageSectionsAdmin);
-router.put('/:key', protect, updateHomepageSection);
+router.get('/admin', protect, authorize('superadmin', 'admin'), getHomepageSectionsAdmin);
+router.put('/:key', protect, authorize('superadmin', 'admin'), updateHomepageSection);
 
 module.exports = router;
